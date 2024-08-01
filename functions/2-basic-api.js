@@ -1,6 +1,7 @@
 
 
 //Importing product data
+
 const items = require('../assets/data.js')
 
 

@@ -15,7 +15,7 @@ const fetchData = async () => {
             <article class="product">
                 <img
                     src="${url}"
-                    alt="utopia sofa"
+                    alt="${name}"
                 />
                 <div class="info">
                     <h5>${name}</h5>
@@ -23,9 +23,11 @@ const fetchData = async () => {
                 </div>
             </article>
         `
-      })
-      console.log(data);
-      result.innerHTML = `<h2>GOD is good</h2>`
+      }).join('');
+
+      //console.log(data);
+      result.innerHTML = products;
+
     } catch (error) {
       result.innerHTML = `<h4>Error, try again later</h4>`
       console.error('Error:', error)
