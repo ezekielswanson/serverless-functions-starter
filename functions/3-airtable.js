@@ -11,8 +11,19 @@ const airtable = new Airtable({ apiKey: 'patV82muFEGIJENN9.042040bf5e397066ff9e4
 exports.handler = async (event, context, cb) => {
 
   try {
-    const data = await airtable.list();
-    console.log(data);
+    const {records} = await airtable.list();
+    console.log(records);
+
+    records.map(record => {
+      
+
+
+    })
+
+    
+
+
+
   } catch (eroror) {}
     return {
         statusCode: 200,
