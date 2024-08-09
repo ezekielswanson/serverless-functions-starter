@@ -9,6 +9,11 @@ const airtable = new Airtable({ apiKey: 'patV82muFEGIJENN9.042040bf5e397066ff9e4
 
 //Domain/.netlify/functions/1-hello
 exports.handler = async (event, context, cb) => {
+
+  try {
+    const data = await airtable.list();
+    console.log(data);
+  } catch (eroror) {}
     return {
         statusCode: 200,
         body: 'I love solving challenging problems to help others :)'
