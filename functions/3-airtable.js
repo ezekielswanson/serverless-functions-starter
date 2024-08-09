@@ -12,6 +12,7 @@ exports.handler = async (event, context, cb) => {
 
   try {
     const {records} = await airtable.list();
+    //console.log(data);
     console.log(records);
 
     records.map(record => {
