@@ -1,6 +1,6 @@
 const Airtable = require('airtable-node');
 
-const airtable = new Airtable({ apiKey: 'patV82muFEGIJENN9.042040bf5e397066ff9e4ad3374190a70337c8f2fb6b51d26062d63ac6a143d9' })
+const airtable = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY})
   .base('appc5JvV86warsg5A')
   .table('products')
 
