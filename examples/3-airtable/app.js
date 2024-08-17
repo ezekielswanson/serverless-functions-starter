@@ -4,7 +4,8 @@ const result = document.querySelector('.result');
 // Fetch data from the serverless function
 const fetchData = async () => {
     try {
-        const { data } = await axios.get('/api/3-airtable');
+        //const { data } = await axios.get('/api/3-airtable');
+        const { data } = await axios.get('/api/3-z-complete');
         //console.log(data);
 
         const products = data.map(product => {
