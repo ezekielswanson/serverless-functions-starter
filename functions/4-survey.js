@@ -21,9 +21,9 @@ exports.handler = async (event, context, cb) => {
         const {records} = await airtable.list();
         console.log(records);
 
-        const survey = records.map(item => {
-            const {id} = item;
-            const {room,votes} = item.fields
+        const survey = records.map(record => {
+            const {id} = record;
+            const {room,votes} = record.fields
             return {id, room, votes}
         })
 
