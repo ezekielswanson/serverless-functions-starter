@@ -21,7 +21,6 @@ const fetchVotes = async () => {
 
         /*
         const {data} = await axios.get('/api/4-survey');
-        const res = votes(vote => {
         */
 
         const res = await axios.get('/api/4-survey');
@@ -30,7 +29,7 @@ const fetchVotes = async () => {
         const votes = res.data;
 
         //do something w/ the data
-        const votesHTML = votes(vote => {
+        const votesHTML = votes.map(vote => {
             const {id, room, votes } = vote
 
             return `
@@ -42,8 +41,10 @@ const fetchVotes = async () => {
                         <h4>
                             ${room}
                         </h4>
-                        <p class="vote-${id}" data-votes="${votes}">${votes}</p>
-                    </di>
+                        <p class="vote-${id}" data-votes="${votes}">${votes} Votes</p>
+                    </div>
+                    <button data-id="${id}">
+                    <i class="fas fa-vote-yea"></i>
                 </li>
             `
         }).join('');
@@ -61,5 +62,22 @@ const fetchVotes = async () => {
 
 
 
-fetchVotes();
+window.addEventListener('load', () => {
+    fetchVotes()
+})
+
+
+result.addEventListener('click', async function(e){
+    console.log(e.target);
+})
+
+
+result.addEventListener('click', async function(e)) {
+    if (e.target.classList.contains('fa-vote-yeah')) {
+        const btn = e.target.parentElement
+        const id = btn.dataset.id
+    }
+
+    console.log(e.target)
+}
 
