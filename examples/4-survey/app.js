@@ -9,13 +9,14 @@ const result = document.querySelector('.result')
 
 
 dsiplaying here
+
  <ul class="result"></ul>
 
 
 */
 
 
-const fetchVotes = async () => {
+const fetchVotes = async () => { 
     try {
         //fetch data from serverless
 
@@ -72,12 +73,24 @@ result.addEventListener('click', async function(e){
 })
 
 
-result.addEventListener('click', async function(e)) {
-    if (e.target.classList.contains('fa-vote-yeah')) {
-        const btn = e.target.parentElement
-        const id = btn.dataset.id
+result.addEventListener('click', async function(e) {
+    if (e.target.classList.contains('fa-vote-yea')) {
+        const btn = e.target.parentElement;
+        const id = btn.dataset.id;
+        const voteNode = result.querySelector(`.vote-${id}`);
+
+
+        const votes = voteNode.dataset.votes;
+        const newVotes = await modifyData(id, votes);
+        voteNode.textContent = `${ newVotes} votes`;
+        voteNode.dataset.votes = newVotes;
+ 
     }
 
-    console.log(e.target)
+});
+
+
+async function modifyData(id, votes) {
+    return Number(votes) + 1
 }
 
