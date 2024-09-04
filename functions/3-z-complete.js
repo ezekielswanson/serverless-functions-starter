@@ -37,11 +37,13 @@ exports.handler = async (event, context, cb) => {
     console.log(records);
 
     const products = records.map(product => {
-      const { id } = product;
-      const { Name, image, price } = product.fields;
-      // Accessing first img in the loop
-      const url = image[0].url;
-      return { id, name: Name, url, price };
+    //destrucruing = extracting values storing them in object param
+    const { id } = product;
+    //dot notate into nested fields object value
+    const { Name, image, price } = product.fields;
+    // Accessing first img in the loop
+    const url = image[0].url;
+    return { id, name: Name, url, price };
     });
 
     return {

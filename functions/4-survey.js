@@ -1,9 +1,10 @@
 
-//Installing Node wrapper for Airtable API
+//Installing Node wrapper pckg for Airtable API
 const Airtable = require('airtable-node');
 require('dotenv').config();
 
-//Accessing Airtable via API Key, Base ID, & Table Name
+//Creating New Instance & 
+//Gives *ACCESS* to Airtable via API Key, Base ID, & Table Name
 const airtable = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
     .base('appc5JvV86warsg5A')
     .table('survey');
