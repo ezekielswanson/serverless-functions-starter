@@ -13,6 +13,7 @@ exports.handler = async (event, context, cb) => {
   // storing data in a variable to be used
   const method = event.httpMethod;
 
+  
   if (method === 'GET') {
     try {
       const { records } = await airtable.list();
@@ -35,25 +36,38 @@ exports.handler = async (event, context, cb) => {
       };
     }
   }
+  
 
   if (method === 'PUT') {
     try {
+      //extract values from the parsed event body object
       const { id, votes } = JSON.parse(event.body);
       if (!id || !votes) {
         return {
           statusCode: 400,
-          body: 'Please provide the id & votes values'
+          body: 'Please provide the id & votes values',
         };
       }
-      // Add your PUT logic here
+
+      //New val sent to airtable
+      const fields = {votes: Number(votes) +1};
+      const item = await airtable.update(id, { fields })
+      console.log(item);
+      if(item.error) {
+        return {
+          statusCode: 400,
+          body:JSON.stringify(item)
+        }
+      }
       return {
         statusCode: 200,
-        body: JSON.stringify({ id, votes })
-      };
+        body: JSON.stringify(item),
+      }
+   
     } catch (error) {
       return {
-        statusCode: 500,
-        body: 'Server error please check logs'
+        statusCode: 400,
+        body: 'Please provide the id & votes values',
       };
     }
   }
@@ -62,5 +76,5 @@ exports.handler = async (event, context, cb) => {
   return {
     statusCode: 405,
     body: 'Only GET & PUT requests allowed',
-  };
-};
+  }
+}

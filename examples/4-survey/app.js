@@ -100,7 +100,7 @@ async function modifyData(id, votes) {
         const {data} = await axios.put(`api/4-survey`, {id,votes})
 
     } catch (error) {
-       //console.log(error.response);
+       console.log(error.response);
        return null
     }
 }
