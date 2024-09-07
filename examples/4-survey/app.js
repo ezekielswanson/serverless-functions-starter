@@ -93,11 +93,14 @@ result.addEventListener('click', async function(e) {
 
 });
 
-
+//Modify data
 async function modifyData(id, votes) {
     title.textContent = 'Loading...'
     try {
-        const {data} = await axios.put(`api/4-survey`, {id,votes})
+        const {data} = await axios.put(`/api/4-survey`, {id,votes});
+        console.log(data);
+        //update the votes on the front end
+        const newVotes = data.fields.votes;
 
     } catch (error) {
        console.log(error.response);
