@@ -15,11 +15,6 @@ exports.handler = async (event, context, cb) => {
 
   if (method === 'GET') {
     try {
-      /*
-      const response = await airtable.list();
-      console.log(response.records);
-      */
-      
       const { records } = await airtable.list();
       console.log(records);
 
@@ -40,14 +35,32 @@ exports.handler = async (event, context, cb) => {
       };
     }
   }
-};
 
-if (method === 'PUT') {
+  if (method === 'PUT') {
+    try {
+      const { id, votes } = JSON.parse(event.body);
+      if (!id || !votes) {
+        return {
+          statusCode: 400,
+          body: 'Please provide the id & votes values'
+        };
+      }
+      // Add your PUT logic here
+      return {
+        statusCode: 200,
+        body: JSON.stringify({ id, votes })
+      };
+    } catch (error) {
+      return {
+        statusCode: 500,
+        body: 'Server error please check logs'
+      };
+    }
+  }
 
-}
-
-//default resp.
-return (
+  // default response
+  return {
     statusCode: 405,
-    body: 'Only GET & PUT request allowed',
-)
+    body: 'Only GET & PUT requests allowed',
+  };
+};

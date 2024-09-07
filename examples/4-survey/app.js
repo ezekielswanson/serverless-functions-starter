@@ -97,7 +97,7 @@ result.addEventListener('click', async function(e) {
 async function modifyData(id, votes) {
     title.textContent = 'Loading...'
     try {
-        const {data} = axios.put(`api/4-survey`, {id,votes})
+        const {data} = await axios.put(`api/4-survey`, {id,votes})
 
     } catch (error) {
        //console.log(error.response);
