@@ -10,6 +10,7 @@ const airtable = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
 
 // Domain/.netlify/functions/4-survey.js
 exports.handler = async (event, context, cb) => {
+  console.log(event);
   // storing data in a variable to be used
   const method = event.httpMethod;
 
@@ -17,7 +18,7 @@ exports.handler = async (event, context, cb) => {
   if (method === 'GET') {
     try {
       const { records } = await airtable.list();
-      console.log(records);
+      //console.log(records);
 
       const survey = records.map(record => {
         const { id } = record;
@@ -52,7 +53,7 @@ exports.handler = async (event, context, cb) => {
       //New val sent to airtable
       const fields = {votes: Number(votes) +1};
       const item = await airtable.update(id, { fields })
-      console.log(item);
+      //console.log(item);
       if(item.error) {
         return {
           statusCode: 400,
