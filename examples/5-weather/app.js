@@ -33,7 +33,7 @@ async function getWeatherData(city) {
 
 
     } catch (error) {
-        console.log(erro.response)
+        console.log(error.response)
     }
 }
 
