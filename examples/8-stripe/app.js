@@ -1,7 +1,12 @@
+
+//Purchase data
+//data = id's, name of prod, and price
 const purchase = [
   { id: '1', name: 't-shirt', price: 1999 },
   { id: '2', name: 'shoes', price: 4999 },
 ]
+
+//how can I generate a random # the background on cc click?
 const total_amount = 6998
 const shipping_fee = 1099
 var stripe = Stripe('YOUR_PUBLIC_KEY')

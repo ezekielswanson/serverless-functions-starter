@@ -1,12 +1,11 @@
-
-
 exports.handler = async (event, context, cb) => {
-    const method = event.httpMethod;
-    const {city} = JSON.parse(event.body);
-    console.log(city);
+    console.log('Raw event body:', event.body);
     
     return {
         statusCode: 200,
-        body: JSON.stringify(city),
-    }
-}
+        body: JSON.stringify({
+            receivedBody: event.body,
+            bodyType: typeof event.body
+        }),
+    };
+};
