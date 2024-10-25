@@ -1,34 +1,55 @@
-
+require('dotenv').config()
+// This is your test secret API key.
+const stripe = require("stripe")(process.env.STRIPE_KEY)
 
 exports.handler = async (event, context, cb) => {
-
-
-// This is your test secret API key.
-const stripe = require("stripe")('pk_test_51Q76IEE95rxLZwVsKdjbdOAd71h2vBnH30c3L8UEB5ndfDJIi6uKqdd5emTC2I523tctbDxS9RSOpMcY7DH0or1h00mz5OUvFV')
-
-app.post("/create-payment-intent", async (req, res) => {
-    const {items} = req.body;
-
-    const paymentIntent = await stripe.paymentIntents.create({
-            amount: calculateOrderAmount(items),
-            currency: "usd",
-            // In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
-            automatic_payment_methods: {
-            enabled: true,
-        },
-    })
-
-    res.send({
-        clientSecret: paymentIntent.client_secret,
-        // [DEV]: For demo purposes only, you should avoid exposing the PaymentIntent ID in the client-side code.
-        dpmCheckerLink: `https://dashboard.stripe.com/settings/payment_methods/review?transaction_id=${paymentIntent.id}`,
-      });
-
-}
-
-
-    return {
-        statusCode: 200,
-        body: 'I love solving challenging problems to help others :)'
+    const method = event.httpMethod;
+    if (method !== 'POST') {
+        return {
+            statusCode: 405,
+            body: 'This only accepts POST requests.'
+        }
     }
+
+    const { purchase, total_amount, shipping_fee } = JSON.parse(event.body);
+    //add shipping fee and total amount
+    //create function 
+    //what's the function doing?
+    //does function need data? 
+    //if yess what aparemters & arguments 
+    //does the data need to be used somwhere else?
+    //what neeeds to happen insdie the functon to add the total fee?
+    //total_amount + shipping_fee 
+
+
+    const calculateOrderTotal = () => {
+        return  total_amount + shipping_fee;
+    }
+
+
+
+    //stripe = stripe "instance"
+    try {
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount: calculateOrderTotal(),
+            currency: 'usd',
+        })
+
+        return {
+            statusCode: 200,
+            body: JSON.stringify({ clientSecret: paymentIntent.client_secret })
+
+        }
+
+        } catch (error) {
+            return {
+                statusCode: 400,
+                body: JSON.stringify(error.message)
+
+        }
+    }
+
+    //console.log(purchase, total_amount, shipping_fee)
+
+   
 }

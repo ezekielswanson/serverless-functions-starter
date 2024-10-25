@@ -9,7 +9,7 @@ const purchase = [
 //how can I generate a random # the background on cc click?
 const total_amount = 6998
 const shipping_fee = 1099
-var stripe = Stripe('YOUR_PUBLIC_KEY')
+var stripe = Stripe('pk_test_51Q76IEE95rxLZwVsKdjbdOAd71h2vBnH30c3L8UEB5ndfDJIi6uKqdd5emTC2I523tctbDxS9RSOpMcY7DH0or1h00mz5OUvFV')
 
 // The items the customer wants to buy
 
